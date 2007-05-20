@@ -1,3 +1,4 @@
+$:.unshift 'lib/'
 require 'net/http'
 require 'feedparser'
 require 'uri'
@@ -91,11 +92,18 @@ class GenericFeed
   
   
 end
- 
-feeds = []
- 
-config = YAML.load_file('conf/conf.yml')
 
+
+feeds = []
+puts ENV['HOME']
+config_file = "#{ENV['HOME']}/.todo_federator"
+if (File.exists?(config_file))
+  config = YAML.load_file(config_file)
+else
+  puts "No config file given. Create one at ~/.todo_federator"
+  puts "See conf/example_conf for hints"
+  exit 1
+end
 config['feeds'].each do |k, v|
   feeds << GenericFeed.new(k,v)
 end

@@ -1,0 +1,22 @@
+# The hiveminder config is straightforward. 
+hiveminder:
+  site: http://hiveminder.com
+  mail: jan_hmhmh@hmhmhm.com
+  password: hmhmhm
+
+# The feeds section contains a list of feeds that should be checked
+# Currently only feeds parsable by feedparser are importable, this will probably extended by ics files
+# type must be "feed"
+# tags are used in hiveminder. currently todo_federator uses the combination of tags and titles to match todos with feed entries
+# auth is a way to specify the login data if the feed is behind some http basic authentication. Most apis use different forms of
+# authentication for feeds.
+
+feeds:
+  rugtool trac tasks:
+    url: http://trac.headflash.com/rugtool/report/7?format=rss&USER=jan
+    type: feed
+    tags: @work rugtool tickets
+    auth:
+      login: hmhm
+      password: hmhmhm
+      

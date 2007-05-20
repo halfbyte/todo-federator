@@ -4,7 +4,6 @@ class JiftyApi
   
  
  def initialize(proxy)
-   @conf = conf
    @client = HTTPAccess2::Client.new(proxy,"RubyHiveminderApi", "")
  end
  

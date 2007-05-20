@@ -10,9 +10,8 @@ class HiveminderApi < JiftyApi
   
   @session_id
   def initialize(conf)
+    super(conf['proxy'])
     @conf = conf
-    @client = HTTPAccess2::Client.new(@conf['proxy'],"RubyHiveminderApi", "jan@krutisch.de")
-    @moniker = 'humbug'
     login
   end
   
@@ -20,22 +19,7 @@ class HiveminderApi < JiftyApi
     res = call('Login', :address => @conf['mail'], :password => @conf['password'])
     #session_id
   end
-    
-  def call(klass, params)
-    jifty_params = { "J:A-#{@moniker}" => klass}
-    params.each do |k,v|
-      jifty_params["J:A:F-#{k.to_s}-#{@moniker}"] = v.to_s
-    end
-    #puts jifty_params.inspect
-    res = @client.post(@conf['site'] + "/__jifty/webservices/yaml",HTTP::Message.escape_query(jifty_params))
-    if res.status = HTTP::Status::OK
-      monika = YAML.load(res.body.content)[@moniker]
-      return monika.nil? ? nil : monika.value
-    else
-      raise "Bad Status from Hiveminder: #{res.status}"
-    end
-  end
-  
+      
   def download_tasks(query="not/complete/starts/before/tomorrow/accepted/nothing")
     res = call('DownloadTasks', :query => query, :format => 'yaml')
     return nil if res.nil?      

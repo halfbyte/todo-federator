@@ -1,0 +1,8 @@
+Jan's TODO federator
+--------------------
+
+This is actually more of a proof of concept. All it does is to read the configured RSS feeds 
+and syncs the items in the feeds with a todo list in Best Practicals "Hiveminder", another one
+of those online todo trackers.
+
+(TODO: more info)
