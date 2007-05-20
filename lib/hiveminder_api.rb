@@ -1,9 +1,10 @@
+
 require 'rubygems'
 require 'http-access2'
-#require 'jifty_api'
+require 'jifty_api'
 #require 'test/unit'
 
-class HiveminderApi
+class HiveminderApi < JiftyApi
   @client = nil
   @conf = {}
   
